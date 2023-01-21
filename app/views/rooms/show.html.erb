@@ -1,0 +1,117 @@
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <!-- 写真 -->
+            <div class="card">
+                <div class="card-content">
+                    <div class="content">
+                        <%= image_tag room_cover(@room) %>
+                    </div>
+                </div>
+            </div>
+            <br/>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <!-- 左側 -->
+            <div class="column is-two-thirds">
+                <div class="columns is-multiline">
+                    <div class="column">
+                        <div class="card">
+                            <div class="card-content">
+                                
+                                <div class="box">
+                                    <article class="media">
+                                        <div class="media-content">
+                                            <div class="content">
+                                                <!-- お部屋の名前 -->
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <h1><%= @room.listing_name %></h1>
+                                                        <h2><%= @room.address %></h2>
+                                                    </div>
+                                                 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                                <div class="box">
+                                    <article class="media">
+                                        <div class="media-content">
+                                            <div class="content">
+                                                <span class="title is-5"><%= @room.user.full_name %></span>
+                                                <figure class="image is-96x96">
+                                                    <%= image_tag avatar_url(@room.user), class: "is-rounded" %>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                                <div class="box">
+                                    <article class="media">
+                                        <div class="media-content">
+                                            <div class="content">
+                                                
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                                                              
+                            </div>
+                        </div>                        
+                    </div>
+                    <!-- カルーセル表示 -->
+                    <div class="column is-full">   
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="hero-carousel" id="carousel-photo">
+                                    <% @room.photos.each do |photo| %>
+                                        <div class="carousel-item has-background image is-16by9">
+                                            <%= image_tag url_for(photo), class: "is-background", width: "100%" %>
+                                        </div>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+             
+                </div>
+            </div>
+            <!-- 右側 -->
+            <div class="column">
+                <div class="columns is-multiline">
+                    <!-- 予約 -->
+                    <div class="column is-full">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="media">
+                                  <%= render 'reservations/form' %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+<script>
+    BulmaCarousel.attach('#carousel-photo', {
+        slidesToScroll: 1,
+        slidesToShow: 1
+    });
+    $(document).ready(function() {
+        $('#tabs li').on('click', function() {
+            var type = $(this).data('tab');
+            $('#tabs li').removeClass('is-active');
+            $(this).addClass('is-active');
+            $('.tab-content').hide();
+            $('#tab-' + type).show();
+        }) 
+    })
+</script>

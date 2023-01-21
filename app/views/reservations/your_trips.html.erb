@@ -1,0 +1,50 @@
+<section class="section">
+    <div class="container">
+        <p class="title">ご予約内容</p>
+        <br/>
+        <table class="table is-fullwidth" style="text-align: center;">
+            <thead>
+                <tr>
+                    <th>申し込み日</th>
+                    <th>お部屋</th>
+                    <th>ホスト</th>
+                    <th></th>
+                    <th>料金</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if @trips.blank? %>
+                  <tr>
+                      <td colspan="7" class="has-text-centered"><h1>表示できるご予約はありません。</h1></td>
+                  </tr>
+                <% end %>
+                <% @trips.each do |trip| %>
+                    <tr>
+                        <td style="padding-top: 30px;"><%= I18n.l(trip.created_at, format: :full_date) %></td>
+                        </td>
+                        <td>
+                            <%= link_to room_path(trip.room), data: { turbolinks: false} do %>                                
+                                <%= image_tag room_cover(trip.room), class: "image is-64x64" %>
+                                <%= trip.room.listing_name %>
+                            <% end %>
+                        </td>
+                        <td style="padding-top: 30px;">
+                            <%= link_to user_path(trip.room.user), class: "tootip" do %>
+                                <figure class="image is-48x48">
+                                    <%= image_tag avatar_url(trip.room.user), class: "is-rounded" %>
+                                </figure>
+                                <%= trip.room.user.full_name %>
+                            <% end %>
+                        </td>
+                        <td style="padding-top: 30px;">
+                            宿泊日：<%= I18n.l(trip.start_date, format: :full_date) %><br/>
+                            ご出発：<%= I18n.l(trip.end_date, format: :full_date) %>
+                        </td>
+                        <td style="padding-top: 30px;"><%= number_to_currency(trip.total) %></td>
+                        </td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</section>

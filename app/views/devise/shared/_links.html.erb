@@ -1,0 +1,22 @@
+<br/>
+<div class="all">
+<%- if controller_name != 'sessions' %>
+  ユーザ登録がお済みの方は<%= link_to "ログイン", new_session_path(resource_name) %>してください。<br />
+  <br/>
+  <p>登録ボタンを押すとメールが送信されます。</p>
+  <p>メールに記載されているリンクをクリックするとアカウントが有効化されます。</p>
+<% end %>
+<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <%= link_to "新規ユーザ登録", new_registration_path(resource_name) %>がお済みでない方は先に登録をお願い致します。<br />
+<% end %>
+<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+  <%= link_to "パスワードをお忘れですか？", new_password_path(resource_name) %><br />
+<% end %>
+<%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+<br/>
+  <%= link_to "確認のメールが届かない方はこちら", new_confirmation_path(resource_name) %><br />
+<% end %>
+<%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+  <%= link_to "ロック解除の手順を受け取っていませんか？", new_unlock_path(resource_name) %><br />
+<% end %>
+</div>

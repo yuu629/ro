@@ -1,0 +1,74 @@
+<nav class="navbar is-light" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <h1>宿泊予約サイト</h1>
+        </a>
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+    
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+            <div class="navbar-item">
+            </div>
+        </div>
+        <div class="navbar-end">
+            <a class="navbar-item"></a>
+            <a class="navbar-item"></a>
+
+            <!-- もしログインしていなかったら-->
+            <% if (!user_signed_in?) %>
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <%= link_to  "新規ユーザ登録", new_user_registration_path, class: "button is-white" %>
+                        <%= link_to  "ログイン", new_user_session_path, class: "button is-white" %>
+                    </div>
+                </div>
+
+            <!-- ログインしていたら　-->
+            <% else %>
+                <div class="navbar-item has-dropdown is-hoverable" style="margin-right: 100px;">
+                    <a class="navbar-item">
+                        <figure class="image is-48x48 m-r-5">
+                        <div style="margin-top: 0.6rem;">
+                        <%= image_tag avatar_url(current_user), class: "is-rounded" %>
+                        </div>
+                        </figure>                    
+                        <%= current_user.full_name %>
+                    </a>
+                    <div class="navbar-dropdown">
+                      <%= link_to  "お部屋を新規登録", new_room_path, class: "navbar-item" %>
+                      <%= link_to  "登録したお部屋一覧", rooms_path, class: "navbar-item" %>    
+                      <%= link_to  "ユーザ登録情報編集", edit_user_registration_path, class: "navbar-item" %>
+                      <a href="" class="navbar-item"></a>
+                      <hr class="navbar-divider">
+                      <%= link_to  "ログアウト", destroy_user_session_path, method: :delete, class: "navbar-item" %>
+                    </div>
+                </div>
+            <% end %>            
+        </div>
+    </div>
+</nav>
+
+<% if (user_signed_in?) %>
+    <nav class="navbar has-shadow" style="z-index: 3;">
+      <div class="container">
+        <div class="navbar">
+          <%= link_to 'プロフィール', dashboard_path, class: "navbar-item" %>
+        </div>
+      </div>
+    </nav>
+<% end %>
+<script>
+    $(document).ready(function() {
+    // navbar burgerアイコンでクリックイベントを確認する
+    $(".navbar-burger").click(function() {
+        // 「navbar-burger」と「navbar-menu」の両方で「is-active」クラスを切り替える
+        $(".navbar-burger").toggleClass("is-active");
+        $(".navbar-menu").toggleClass("is-active");
+    });
+    });
+</script>

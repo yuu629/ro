@@ -1,0 +1,34 @@
+<section class="hero is-dark is-fullheight">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-6-table is-6-desktop is-6-widescreen">
+          <div class="box">
+            <div class="field has-text-centered">
+              <strong>パスワードを変更します</strong>
+            </div>
+            <br/>
+            <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+              <%= render "devise/shared/error_messages", resource: resource %>
+              <%= f.hidden_field :reset_password_token %>
+              <div class="field">
+                <% if @minimum_password_length %>
+                  <em>新しいパスワード(<%= @minimum_password_length %> 文字以上)</em><br />
+                <% end %>
+                <%= f.password_field :password, autofocus: true, autocomplete: "new-password", placeholder: "新しいパスワードを入力して下さい", class: "input" %>
+              </div>
+              <br/>
+              <div class="field">
+                <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "確認", class: "input" %>
+              </div>
+              <br/>
+              <div class="actions">
+                <%= f.submit "パスワードを変更する", class: "button is-danger is-fullwidth m-t-10 m-b-10" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

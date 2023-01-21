@@ -1,0 +1,62 @@
+<section class="section">
+    <div class="container">
+        <div class="columns">
+        
+            <!-- 左パネル -->
+            <div class="column is-one-third">
+                <div class="columns is-multiline">
+                    <!-- 上部 -->
+                    <div class="column is-full">
+                        <div class="card">
+                            <!-- アバター -->
+                            <div class="card-content is-horizontal-center is-flex">
+                                <figure class="image is-256x256">
+                                    <%= image_tag avatar_url(@user), class: "is-rounded" %>
+                                </figure>
+                            </div>
+                            
+                            <div class="card-content">
+                                <!-- 画像アップロードボタン -->
+                                <div class="content has-text-centered">
+                                    <p class="title is-5">
+                                        <%= @user.full_name %>
+                                    </p>
+                      
+                                </div>
+                                <hr class="h-10">
+                                
+                                <!-- アカウント情報 -->
+                                <article class="media">
+                                    <div class="media-content">アカウント登録日</div>
+                                    <div class="media-right">
+                                        <strong><%= I18n.l(@user.created_at, format: :full_date) %></strong>
+                                    </div>
+                                </article>
+                                <hr class="h-10">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 下部 -->
+                    <div class="column is-full">
+                        <div class="card">
+                            <div class="card-content">
+                                 <!-- アカウント詳細 -->
+                                <article>
+                                    <div class="media">
+                                        <div class="media-content">
+                                            <p>
+                                                <strong>自己紹介</strong>
+                                                <br>
+                                                <%= current_user.about %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </article>
+                                <hr class="h-10">
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>

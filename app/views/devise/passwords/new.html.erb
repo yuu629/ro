@@ -1,0 +1,29 @@
+<section class="hero is-dark is-fullheight">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-6-table is-6-desktop is-6-widescreen">
+          <div class="box">
+            <div class="field has-text-centered">
+              <strong>パスワードをお忘れですか？</strong>
+            </div>
+            <br/>
+            <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+              <%= render "devise/shared/error_messages", resource: resource %>
+              <div class="field">
+                <%= f.label :メールアドレス, class: "label" %>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレスを入力してください", class: "input" %>
+              </div>
+              <br/>
+              <div class="actions">
+                <%= f.submit "パスワード再設定メールを送る", class: "button is-danger is-fullwidth m-t-10 m-b-10" %>
+              </div>
+            <% end %>
+            <br/>
+            <p>メールに記載されているリンクをクリックするとパスワードの再設定ができます。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
